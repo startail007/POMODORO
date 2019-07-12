@@ -18,7 +18,8 @@ window.onload = function(){
         el: '#app',
         data: {
         	removeActive:false,
-        	drag:false,
+        	todoListDrag:false,
+            doneListDrag:false,
         	totalTime:0,
         	times:{
         		work:25*60,
@@ -46,13 +47,24 @@ window.onload = function(){
         		{title:"PREPARE PRESENTATION",id:_uuid(),count:0},
         	],
         	doneList:[
-                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,8).getTime(),count:1},
-                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,9).getTime(),count:1},
-                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,10).getTime(),count:2},
-                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,11).getTime(),count:5},
+                {title:"test",id:_uuid(),count:1},
+                {title:"test",id:_uuid(),count:1},
+                {title:"test",id:_uuid(),count:2},
+                {title:"test",id:_uuid(),count:5},
         	],
         	removeList:[
         	],
+            historyList:[
+                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,8).getTime()},
+                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,9).getTime()},
+                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,10).getTime()},
+                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,10).getTime()},
+                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,11).getTime()},
+                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,11).getTime()},
+                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,11).getTime()},
+                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,11).getTime()},
+                {title:"test",id:_uuid(),computedTime:new Date(2019,7-1,11).getTime()},
+            ],
         	activeID:"",
         	add:false,
         	addText:"",
@@ -77,7 +89,7 @@ window.onload = function(){
         		console.log(this.removeList.length,this.removelen)
         		return this.removeList.length!=this.removelen;
         	},
-            doneList:{
+            historyList:{
                 handler: function(newVal, oldVal) {                    
                     this.week = this.getWeekData();                    
                 },
@@ -111,29 +123,40 @@ window.onload = function(){
                     });
                 }
 
-                for(var temp in this.doneList){
-                    var computedTime = this.doneList[temp].computedTime;
+                for(var temp in this.historyList){
+                    var computedTime = this.historyList[temp].computedTime;
                     var index = week.findIndex(function(el){
                         return (computedTime>=el.min)&&(computedTime<el.max);
                     });
                     if(index!=-1){
-                        week[index].value+=this.doneList[temp].count;
+                        week[index].value++;
                     }
 
                 }
                 return week;
             },
-        	start:function(e){
-        		this.drag = true;
+        	todoListStart:function(e){
+        		this.todoListDrag = true;
         	},
-        	end:function(e){
-        		this.drag = false;
+        	todoListEnd:function(e){
+        		this.todoListDrag = false;
         		this.removeActive = false;
         	},
-        	checkMove:function(e){
-        		this.removeActive = e.to===this.$refs.removeBox.$el;
+        	todoListCheckMove:function(e){
+        		this.removeActive = e.to===this.$refs.todoListRemoveBox.$el;
                 return true;
         	},
+            doneListStart:function(e){
+                this.doneListDrag = true;
+            },
+            doneListEnd:function(e){
+                this.doneListDrag = false;
+                this.removeActive = false;
+            },
+            doneListCheckMove:function(e){
+                this.removeActive = e.to===this.$refs.doneListRemoveBox.$el;
+                return true;
+            },
         	updateActiveID:function(){
         		if(this.activeID==""){
         			if(this.todoList.length>0){
@@ -172,6 +195,13 @@ window.onload = function(){
                             sound.currentTime = 0;
                             sound.play();
                         }
+                        var temp = this.todoList[this.currentlyItemIndex];
+                        this.historyList.push({
+                            title:temp.title,
+                            id:temp.id,
+                            computedTime:Date.now()
+                        });
+                        console.log(this.historyList);
                         alert("work finished");
                         this.todoList[this.currentlyItemIndex].count++;
                         this.status = "break";
@@ -211,18 +241,19 @@ window.onload = function(){
         		this.totalTime = this.times[this.status];
         	},
         	todoListIcon_click:function(e,item,index){ 
-                /*if(confirm("任务完成确认"))
-                {*/
-            		if(this.activeID == item.id){
-    	        		this.status = "work";
-                        this.activeID = "";
-    	        		this.stopTiming();
-    	        		this.totalTime = this.times[this.status];
-    	        	}
-                    this.computedItem(index);
-                    this.updateActiveID(); 
-                //}
+        		if(this.activeID == item.id){
+	        		this.status = "work";
+                    this.activeID = "";
+	        		this.stopTiming();
+	        		this.totalTime = this.times[this.status];
+	        	}
+                this.computedItem(index);
+                this.updateActiveID(); 
         	},
+            doneListIcon_click:function(e,item,index){
+                this.unComputedItem(index);
+                this.updateActiveID();
+            },
         	addText_click:function(){
         		this.add = true;
         	},
@@ -266,8 +297,17 @@ window.onload = function(){
                     this.doneList.push({
                         title:temp.title,
                         id:temp.id,
-                        count:temp.count,
-                        computedTime:Date.now()
+                        count:temp.count
+                    });
+                }
+            },
+            unComputedItem:function(index){
+                if(index!=-1){
+                    var temp = this.doneList.splice(index, 1)[0];
+                    this.todoList.push({
+                        title:temp.title,
+                        id:temp.id,
+                        count:temp.count
                     });
                 }
             }
