@@ -1,0 +1,1255 @@
+body{
+	margin:0;
+    background-color: #777;
+	font-family: 'Roboto', sans-serif;
+}
+.app{
+	position: relative;
+	display: inline-block;
+	width: 1280px;
+	height: 800px;
+    overflow: hidden;
+    text-align: initial;
+    font-size: initial;
+}
+.mainAPP{
+    position: absolute;
+    display: table;
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+}
+.mainContent{
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+/*.bg{
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-image: url(../img/music.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+}*/
+
+/*頁面*/
+.main{
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+}
+.main.work{	
+    background-color: #FFEDF7;
+}
+.main.break{	
+    background-color: #E5F3FF;
+}
+.main{
+	//opacity: 0.5;
+	//opacity: 1;
+}
+.innerPage{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #003164;
+    top: 0px;
+    left: 0px;
+}
+.innerPage{
+	//opacity: 0.5;
+	//opacity: 1;
+}
+/*頁面框*/
+
+.removeBox{
+    position: relative;
+    display: block;
+    z-index: 1;
+}
+.removeBox .text{
+    position: absolute;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #ff0;
+    text-align: center;
+    color: #ff0;
+    font-weight: bold;
+    width: 100%;
+}
+.removeBox .listItem{
+    display: none;
+}
+.removeBox.active .text{
+    color: #f00;
+    border-color:#f00;
+}
+
+/*事項*/
+.matter{    
+	position: absolute;
+    display: block;
+    width: 465px;
+    height: 725px;
+    left: 75px;
+    top: 40px;
+    box-sizing: border-box;
+	padding: 8px 10px;
+}
+/*內頁框*/
+.innerPage{
+
+}
+.innerPageContent{	
+	position: absolute;
+    display: block;
+    width: 465px;
+    height: 725px;
+    right: 265px;
+    top: 40px;
+    box-sizing: border-box;
+	padding: 8px 10px;
+}
+/*新增按鈕*/
+.newButton{
+	position: relative;
+    display: block;
+    height: 55px;
+    line-height: 55px;
+    font-style: italic;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: bolder;
+    color: #777;
+    letter-spacing: -0.01em;
+    transition: color .3s;
+}
+.newButton .text{
+	position: absolute;
+    display: block;
+    width: 100%;
+    border: 0;
+    height: 100%;
+	font-family: 'Roboto', sans-serif;    
+	outline: 0;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    padding: 0px 16px;
+    padding-right: 45px;
+    box-sizing: border-box;
+}    
+.newButton .inputText{
+	position: absolute;
+    display: block;
+    width: 100%;
+    border: 0;
+    height: 100%;
+	font-family: 'Roboto', sans-serif;    
+	outline: 0;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    padding: 0px 16px;
+    padding-right: 45px;
+    box-sizing: border-box;
+    font-weight: bold;
+    color: #FF4384;
+}    
+.addButton{
+	position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    right: 18px;
+    top: 17.5px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color .3s;
+}
+.addButton:hover{
+    background-color: rgba(119, 119, 119, 0.2);
+}
+.addButton:before{
+	content: "";
+	position: absolute;
+	display: block;
+	width: 2px;
+    height: 14px;
+    left: 50%;
+    top: 50%;
+    margin-left: -1px;
+    margin-top: -7px;
+    background-color: #777;
+    transition: background-color .3s;
+}
+.addButton:after{
+	content: "";
+	position: absolute;
+	display: block;
+	width: 14px;
+    height: 2px;
+    left: 50%;
+    top: 50%;
+    margin-left: -7px;
+    margin-top: -1px;
+    background-color: #777;
+    transition: background-color .3s;
+}
+
+.newButton.pink{
+	color: #FF4384;
+}
+.newButton.pink .addButton:hover{
+    background-color: rgba(255, 67, 132, 0.2);
+}
+.newButton.pink .addButton:before{
+	background-color: #FF4384;
+}
+.newButton.pink .addButton:after{	
+	background-color: #FF4384;
+}
+
+
+.newButton.aquamarine{
+	color: #00A7FF;
+}
+.newButton.aquamarine .addButton:hover{
+    background-color: rgba(0, 167, 255, 0.2);
+}
+.newButton.aquamarine .addButton:before{
+	background-color: #00A7FF;
+}
+.newButton.aquamarine .addButton:after{	
+	background-color: #00A7FF;
+}
+
+/*closeButton*/
+.closeButton{
+    position: absolute;
+    display: block;
+    width: 48px;
+    height: 48px;    
+    right: 85px;
+    top: 48px;
+    cursor: pointer;
+    transition: background-color .3s;
+    border-radius: 48px;
+}
+.closeButton:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.closeButton:before{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 3px;
+    height: 35px;
+    left: 50%;
+    top: 50%;
+    margin-left: -1.5px;
+    margin-top: -17.5px;
+    background-color: #fff;
+    transform: rotate(45deg);
+}
+.closeButton:after{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 35px;
+    height: 3px;
+    left: 50%;
+    top: 50%;
+    margin-left: -17.5px;
+    margin-top: -1.5px;
+    background-color: #fff;
+    transform: rotate(45deg);
+}
+
+/*目前項目*/
+.currentlyItem{
+	position: relative;
+    display: block;
+    height: 255px;
+    margin-top: 145px;
+}
+.currentlyItemTitle{
+	position: relative;
+	display: block;
+	height: 50px;
+}
+.currentlyItemTime{
+	position: relative;
+    display: block;
+    font-size: 170px;
+    color: #777;
+    letter-spacing: 0.03em;
+    font-weight: bolder;
+    text-align: center;
+}
+.currentlyItemTime.pink{	
+	color: #FF4384;
+}
+.currentlyItemTime.aquamarine{	
+	color: #00A7FF;
+}
+.currentlyItemTitle .icon{
+	position: absolute;
+	display: block;
+	width: 48px;
+	height: 48px;
+    border-radius: 48px;
+    border: 1px solid #000;
+}
+.currentlyItemTitle .text{
+	position: relative;
+    display: block;
+    padding-left: 64px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #003164;
+}
+.currentlyItemTitle .timeItems{			
+	position: relative;
+    display: block;
+    padding-left: 64px;
+    /*height: 30px;
+    line-height: 30px;*/
+    /*font-size: 24px;
+    color: #003164;*/
+}
+.currentlyItemTitle .timeItems .dot{
+    position: relative;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #003164;
+    border-radius: 12px;
+    margin-left: 9px;
+    vertical-align: bottom;
+}
+.currentlyItemTitle .timeItems .dot:first-child{
+    margin-left: 0px;
+}
+.currentlyItemTitle .timeItems .Ring{
+    position: relative;
+    display: inline-block;
+    left: auto;
+    top: auto;
+    width: 12px;
+    height: 12px;
+    vertical-align: bottom;
+    margin-left: 5px;
+}
+.currentlyItemTitle .timeItems .Ring:before{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #FF4384;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+.currentlyItemTitle .timeItems .Ring .SVG{
+    margin-left: 0px;
+    margin-top: 0px;
+    position: relative;
+}
+.currentlyItemTitle .timeItems .Ring .SVG > .Rate{    
+    stroke: #FF4384;
+}
+/*事項*/
+.itemTitle{
+	position: relative;
+	display: block;
+	height: 44px;
+	line-height: 44px;
+	font-size: 24px;
+	background-color: rgba(255, 255, 255, 0.2);
+	color: #fff;
+	font-weight: bold; 
+    padding: 0px 16px;
+    letter-spacing: 0.04em;
+    transition: background-color .3s;
+}
+.itemTitle.fold{
+    cursor: pointer;
+}
+.itemTitle.fold:hover{
+    background-color: rgba(255, 67, 132, 0.2);
+}
+.itemTitle.fold:before{
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    display: block;
+    right: 23px;
+    top: 50%;
+    /* margin-left: -3px; */
+    border-width: 5px 5px 0 5px;
+    border-color: #fff transparent transparent transparent;
+    margin-top: -2.5px;
+    transition: border .3s;
+}
+.itemTitle.fold.active:before{    
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent #fff transparent;
+    /*margin-top: -2.5px;*/
+}
+.itemContent{
+    position: relative;
+    display: block;
+}
+#to-do .itemContent{
+	margin-top: 14px;
+}
+#done .itemContent{
+    margin-top: 7px;
+}
+#work .itemContent{
+    font-size: 0;
+}
+.list{
+    position: relative;
+    display: block;    
+    overflow: auto;
+    padding-bottom: 1px;
+}
+#to-do .itemContent .list{    
+    max-height: 243px;
+}
+#done .itemContent .list{
+    max-height: 201px;
+}
+.matterTodoList{	
+	margin-top: 105px;
+}
+
+.listItem{
+	position: relative;
+    display: block;
+    height: 32px;
+    line-height: 32px;
+	margin-top: 9px;
+}
+.listItem:after{
+	content: "";
+	position: relative;
+	display: block;
+	height: 1px;
+	background-color: #777;
+	opacity: 0.2;
+}
+.listItem:first-child{			
+	margin-top: 0px;
+}
+.listItem .icon{
+	position: absolute;
+	display: block;
+	width: 20px;
+	height: 20px;
+    border-radius: 20px;    
+    border: 2px solid #777;
+	top: 4px;
+	left: 2px;
+	box-sizing: border-box;
+}
+#to-do .listItem .icon{
+    cursor: pointer;
+    transition: background-color .3s;
+}
+#to-do .listItem .icon:hover{
+    background-color: #fff;
+}
+#done .listItem .icon:before{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 7px;
+    left: 26%;
+    top: 61%;
+    margin-left: -1px;
+    margin-top: -3.5px;
+    background-color: #fff;
+    transform: rotate(-45deg);
+}
+#done .listItem .icon:after{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 11px;
+    left: 57%;
+    top: 52%;
+    margin-left: -1px;
+    margin-top: -5.5px;
+    background-color: #fff;
+    transform: rotate(45deg);
+}
+
+.listItem .text{
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 28px;
+    color: #777;
+}
+.listItem .count{
+    position: absolute;
+    display: block;
+    right: 0px;
+    font-size: 24px;
+    color: #fff;
+    line-height: 32px;
+    top: 0px;
+}
+
+#done .listItem .text{
+    text-decoration: line-through;
+}
+#to-do .listItem{
+    cursor: move;
+}
+
+
+.listItem .button{
+	position: absolute;
+	display: block;
+	width: 20px;
+	height: 20px;
+    border-radius: 20px;
+    border: 2px solid #777;
+    right: 2px;
+	top: 4px;
+	box-sizing: border-box;
+    cursor: pointer;
+    transition: transform .3s;
+}
+.listItem .button:hover{    
+    transform: scale(1.2);
+}
+.listItem .button:before{
+	content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 7px;
+    border-color: transparent transparent transparent #777;
+    position: absolute;
+    display: block;
+    left: 50%;
+    top: 50%;
+    margin-left: -3px;
+    margin-top: -5px;
+}
+
+.listItem.dark:after{
+	background-color: #003164;
+}
+.listItem.dark .icon{
+    border: 2px solid #003164;
+}
+.listItem.dark .text{
+    color: #003164;
+}
+.listItem.dark .button{
+    border: 2px solid #003164;
+}
+.listItem.dark .button:before{	
+    border-color: transparent transparent transparent #003164;
+}
+
+.listItem.pale:after{	
+	background-color: #fff;
+}
+.listItem.pale .icon{
+    border: 2px solid #fff;
+}
+.listItem.pale .text{
+    color: #fff;
+}
+.listItem.pale .button{
+    border: 2px solid #fff;
+}
+.listItem.pale .button:before{	
+    border-color: transparent transparent transparent #fff;
+}
+
+
+.listItem.sortable-chosen .text{
+    color: #ff0;
+}
+
+.control{
+	position: relative;
+    display: block;
+    text-align: right;
+    line-height: 44px;
+}
+.moreButton{	
+	position: relative;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #777;
+    cursor: pointer;
+}
+.moreButton.pink{	
+	color: #FF4384;
+}
+.moreButton.aquamarine{	
+	color: #00A7FF;
+}
+
+/*時鐘*/
+.clockBox{
+    position: absolute;
+    display: block;
+    right: 450px;
+    top: 50%;
+}
+.clock{
+	position: absolute;
+	display: block;
+	width: 540px;
+	height: 540px;
+	margin-left: -270px;
+	margin-top: -270px;
+	border-radius: 540px;
+    box-sizing: border-box;
+}
+.clockContent{
+	position: absolute;
+    display: block;
+    width: 510px;
+    height: 510px;
+    border-radius: 510px;
+    left: 50%;
+    top: 50%;
+    margin-left: -255px;
+    margin-top: -255px;
+}
+.clockContent .bg{
+    position: absolute;
+    display: block;
+    width: 510px;
+    height: 510px;
+    border-radius: 510px;
+    background-color: #777;
+    transition: background-color .3s;
+}
+.clockContent .bg:before{
+	content: "";
+	position: absolute;
+    display: block;
+	width: 540px;
+	height: 540px;
+	margin-left: -270px;
+	margin-top: -270px;
+	left: 50%;
+	top: 50%;
+	border:5px solid #777;
+	border-radius: 540px;
+	box-sizing: border-box;
+    transition: border .3s;
+}
+.clockContent .bg:after{
+	content: "";
+	position: absolute;
+    display: block;
+    width: 510px;
+    height: 510px;
+    margin-left: -255px;
+    margin-top: -255px;
+	left: 50%;
+	top: 50%;
+	border:5px solid #777;
+    border-radius: 510px;
+	box-sizing: border-box;
+    transition: border .3s;
+}
+.clockButton{
+	position: absolute;
+	display: block;
+	width: 90px;
+	height: 90px;
+	margin-left: -45px;
+	margin-top: -45px;
+	border-radius: 90px;
+    background-color: #fff;
+	left: 50%;
+	top: 50%;   
+	cursor: pointer;
+    transition: transform .5s,background-color .3s;
+}
+.clockButton .icon{    
+    transition: transform .3s;
+}
+.clockButton:hover{
+    transform: scale(1.1);
+}
+.clockButton:hover .icon{
+    transform: scale(0.85);
+}
+
+.Ring{
+	position: absolute;
+	display: block;
+	left: 50%;
+	top: 50%;
+}
+.SVG{			
+	position: absolute;
+	display: block;
+	margin-left: -270px;
+	margin-top: -270px;
+	transform: rotate(-90deg);
+}
+.Ring > .SVG > .Rate{
+	stroke: #777;
+}
+.clock.play .Ring{
+    display: none;
+    //opacity: 0.75;
+}
+.clock.pause .Ring{
+    //opacity: 1;
+}
+.clock.play .clockContent .bg{			
+    background-color: #777;
+}
+.clock.play .clockButton{
+    background-color: #fff;			
+}
+.clock.pause .clockContent .bg{			
+    background-color: #fff;
+}
+.clock.pause .clockButton{
+    background-color: #777;			
+}
+.clock .clockButton .icon{
+	position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.clock.play .clockButton .icon:before{
+	content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 20px 0 20px 25px;
+    border-color: transparent transparent transparent #777;
+    position: absolute;
+    display: block;
+    left: 50%;
+    top: 50%;
+    margin-left: -10px;
+    margin-top: -20px;
+}
+
+.clock.pause .clockButton .icon:before{
+	content: "";
+    width: 8px;
+    height: 35px;
+    left: 32px;
+    top: 50%;
+    margin-top: -17.5px;
+    position: absolute;
+    display: block;
+    background-color: #fff;
+}
+.clock.pause .clockButton .icon:after{
+	content: "";
+    width: 8px;
+    height: 35px;
+    right: 32px;
+    top: 50%;
+    margin-top: -17.5px;
+    position: absolute;
+    display: block;
+    background-color: #fff;
+}
+
+.clock.pink .clockContent .bg:before{	
+	border:5px solid #FF4384;
+}
+.clock.pink .clockContent .bg:after{	
+	border:5px solid #FF4384;
+}
+.clock.pink .Ring > .SVG > .Rate{	
+	stroke: #FF4384;
+}
+.clock.pink.play .clockContent .bg{	
+    background-color: #FF4384;
+}
+.clock.pink.pause .clockButton{	
+    background-color: #FF4384;
+}
+.clock.pink.play .clockButton .icon:before{	
+    border-color: transparent transparent transparent #ff4384;
+}
+
+.clock.aquamarine .clockContent .bg:before{	
+	border:5px solid #00A7FF;
+}
+.clock.aquamarine .clockContent .bg:after{	
+	border:5px solid #00A7FF;
+}
+.clock.aquamarine .Ring > .SVG > .Rate{	
+	stroke: #00A7FF;
+}
+.clock.aquamarine.play .clockContent .bg{	
+    background-color: #00A7FF;	
+}
+.clock.aquamarine.pause .clockButton{	
+    background-color: #00A7FF;	
+}
+.clock.aquamarine.play .clockButton .icon:before{	
+    border-color: transparent transparent transparent #00A7FF;
+}
+
+.clockBox.small{ 
+    right: auto;
+    top: auto;    
+    left: 85px;
+    bottom: 0px;
+    width: 350px;
+    height: 175px;
+    background-color: white;
+    border-radius: 175px 175px 0px 0px;
+}
+.clockBox.small .clock{;    
+    width: 120px;
+    height: 120px;
+    margin-left: -60px;
+    margin-top: -60px;
+    border-radius: 120px;
+    left: 50%;
+    background-color: #003164;
+}
+.clockBox.small .SVG{          
+    margin-left: -52px;
+    margin-top: -52px;
+}
+.clockBox.small .clockContent{
+    width: 90px;
+    height: 90px;
+    border-radius: 90px;
+    margin-left: -45px;
+    margin-top: -45px;
+}
+.clockBox.small .clockContent .bg{
+    width: 90px;
+    height: 90px;
+    border-radius: 90px;
+}
+.clockBox.small .clockContent .bg:before{
+    width: 104px;
+    height: 104px;
+    margin-left: -52px;
+    margin-top: -52px;
+    border-width: 2px;
+    border-radius: 104px;
+}
+.clockBox.small .clockContent .bg:after {
+    width: 90px;
+    height: 90px;
+    margin-left: -45px;
+    margin-top: -45px;
+    border-width: 2px;
+    border-radius: 90px;
+}
+.clockBox.small .clock.pink.play .clockButton{    
+    background-color: #ff4384;
+}
+.clockBox.small .clock.aquamarine.play .clockButton{    
+    background-color: #00A7FF;
+}
+.clockBox.small .clock.pink.play .clockButton .icon:before {
+    border-color: transparent transparent transparent #fff;
+}
+.clockBox.small .clock.aquamarine.play .clockButton .icon:before {
+    border-color: transparent transparent transparent #fff;
+}
+.clockBox.small .clock.pink.pause .clockButton{    
+    background-color: #fff;
+}
+.clockBox.small .clock.aquamarine.pause .clockButton{  
+    background-color: #fff;  
+}
+.clockBox.small .clock.pink.pause .clockButton .icon:before {
+    background-color: #ff4384;
+}
+.clockBox.small .clock.pink.pause .clockButton .icon:after {
+    background-color: #ff4384;
+}
+.clockBox.small .clock.aquamarine.pause .clockButton .icon:before {
+    background-color: #00A7FF;
+}
+.clockBox.small .clock.aquamarine.pause .clockButton .icon:after {
+    background-color: #00A7FF;
+}
+.clockBox.small .info{
+    position: absolute;
+    display: block;
+    width: 100%;
+    bottom: 0px;
+}
+.clockBox.small .info .currentlyItemTime{
+    font-size: 64px;
+}
+.clockBox.small .info .text{    
+    position: relative;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #003164;
+    padding: 0px 0px 22px;
+}
+/*logo*/
+.logo{
+	position: absolute;
+    display: block;
+    width: 45px;
+    right: 80px;
+    bottom: 48px;
+    z-index: 1;
+}
+.logo .text{
+	position: relative;
+    display: block;
+    width: 19px;
+    margin: 0 auto;
+}
+.logo .text img{
+	display: block;
+    width: 100%;
+}
+/*nav*/
+.box.navBox{
+    position: absolute;
+    display: block;
+    width: 450px;
+    height: 100%;
+    background-color: #003164;
+    right: 0px;
+}
+.nav{
+	position: absolute;
+    display: block;
+    height: 100%;
+    right: 80px;
+    padding: 4px 0px;
+}
+.innerPage .nav{
+    right: auto;
+    left: 80px;
+}
+.nav .button{
+	position: relative;
+    display: block;
+    margin-top: 39px;
+    cursor: pointer; 
+    border-radius: 10px;
+    transition: background-color .3s;
+}
+.nav .button .icon{
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 45px;   
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+    transition: opacity .3s,background-image .3s;
+}
+.nav .button:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.nav .button .text{
+    position: relative;
+    display: inline-block;
+    height: 45px;     
+    line-height: 45px;
+    vertical-align: middle; 
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+    color: #fff;
+    transition: opacity .3s,color .3s;
+}
+.innerPage .nav .button .icon,
+.innerPage .nav .button .text{
+    opacity: 0.2;
+}
+.innerPage .nav .button.active .icon,
+.innerPage .nav .button.active .text{    
+    opacity: 1;
+}
+.innerPage .nav .button.active .text{    
+    color: #FF4384;
+}
+#list{
+	background-image: url(../img/list.svg);
+}
+#assessment{
+	background-image: url(../img/assessment.svg);
+}
+#music{
+	background-image: url(../img/music.svg);
+}
+
+.innerPage .nav .button.active #list{
+    background-image: url(../img/list_active.svg);
+}
+.innerPage .nav .button.active #assessment{
+    background-image: url(../img/assessment_active.svg);
+}
+.innerPage .nav .button.active #music{
+    background-image: url(../img/music_active.svg);
+}
+
+/*countBox*/
+.countBox{    
+    position: relative;
+    display: inline-block;
+    text-align: left;
+}
+.countBox .title{
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+}
+.countBox .display{
+    
+}
+.countBox .num{
+    font-size: 64px;
+    color: #FF4384;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+}
+.countBox .text{
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.2;
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+}
+/*tableBox*/
+.tableBox{
+    display: table;
+    width: 100%;
+    margin-top: 10px;
+    table-layout:fixed;
+}
+.tableCell{
+    display: table-cell;
+}
+
+/*report*/
+.report{
+    position: relative;
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 0px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #fff;
+    margin-top: 14px;
+}
+.tableReport{
+    position: relative;
+    width: 100%;
+    /*padding-left: 15px;
+    padding-right: 10px;*/
+    box-sizing: border-box;
+    text-align: center;
+    border-collapse: collapse;
+}
+.tableReport{
+}
+.report td.left{
+    width: 16px;
+}
+.report td.right{
+    width: 8px;
+}
+.tableReport .box{   
+    border: 1px solid #fff;
+    border-top-color: transparent;
+    border-right-color: transparent;
+}
+.tableReport .box td{
+    position: relative;
+    height: 242px;
+    vertical-align: bottom;
+    font-size: 0;
+    padding-top: 0px;
+    box-sizing: border-box;
+}
+.tableReport .text td{
+    position: relative;
+    height: 48px;
+}
+.tableReport .proportionBox{    
+    position: relative;
+    display: inline-block;
+    height: 50%;
+    width: 32px;
+    background-color: #fff;
+}
+.tableReport .proportionBox.active{
+    background-color: #FF4384;    
+}
+.tableReportHour{
+    position: absolute;
+    left: 0px;
+    text-align: left;
+    border-collapse: collapse;
+}
+.tableReportHour td{
+    position: relative;
+    height: 37px;
+    vertical-align: top;
+}
+.timeDateRange{
+    position: absolute;
+    display: block;
+    right: 20px;
+    top: 0px;
+    font-size: 16px;
+}
+
+/*排版*/
+.spacing{
+    position: relative;
+    display: block;
+    height: 49px;
+}
+
+/*radio*/
+.radioBox{
+    margin-top: 5px;
+}
+.radio{
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    padding: 10px 2px;    
+    box-sizing: border-box;
+    width: 33.3333333%;
+    font-size: 16px;
+    cursor: pointer;
+}
+.radio .icon{
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    /* background-color: #fff; */
+    border: 2px solid #fff;
+    border-radius: 20px;
+    margin: 0;
+    box-sizing: border-box;
+    outline: 0;
+    vertical-align: middle;
+    transition: border .3s;
+}
+.radio .icon:after{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    background-color: #fff;
+    border-radius: 10px;
+    left: 50%;
+    top: 50%;
+    margin-left: 0px;
+    margin-top: 0px;
+    transition: width .3s,height .3s,margin-left .3s,margin-top .3s,background-color .3s;
+}
+.radio:hover .icon{
+    border-width: 4px;
+}
+.radio .icon:checked{
+    border: 2.5px solid #FF4384;
+}
+.radio .icon:checked:after{
+    width: 10px;
+    height: 10px;
+    background-color: #FF4384;
+    margin-left: -5px;
+    margin-top: -5px;
+}
+.radio .text{
+    vertical-align: middle;
+    margin-left: 2px;
+}
+/*.radio.checked{    
+    color: #f00;
+}*/
+/*設定*/
+/*#to-do{       
+    margin-top: 49px;
+}
+#done{       
+    margin-top: 49px;
+}
+#chart{    
+    margin-top: 49px;
+}
+#break{    
+    margin-top: 49px;
+}*/
+
+.flip-list-move {
+    transition: transform 0.5s;
+}
+
+
+
+/*過度*/
+.innerPage-enter-active {
+    transition: opacity .8s,transform .3s .5s,background-color .3s .5s;
+}
+.innerPage-leave-active {
+    transition: opacity .5s .3s,transform .8s,background-color .3s .5s;
+}
+.innerPage-enter, .innerPage-leave-to {
+    opacity: 0;
+    background-color: transparent;
+    //transform: translateX(100%);
+    transform: translateX(1075px);
+}
+
+.itemContent-enter-active, .itemContent-leave-active{
+    transition: opacity .3s,transform .3s;
+}
+.itemContent-enter,.itemContent-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+.innerPageName-enter-active, .innerPageName-leave-active{
+    transition: opacity 3s;
+}
+.innerPageName-enter,.innerPageName-leave-to {
+    opacity: 0;
+}

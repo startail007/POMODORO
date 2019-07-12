@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+	<script src="js/vue.js"></script>
+	<script src="js/Sortable.min.js"></script>
+	<script src="js/vuedraggable.umd.min.js"></script>
+	<!--<script src="js/vue-dragging.es5.js"></script>-->
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script src="js/index.js"></script>
+	<style>
+		[v-cloak] {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="mainAPP">
+		<div class="mainContent">
+			<div class="app" id="app" v-cloak>
+				<audio v-for="(item,key) in soundSrc" :ref="'sound_'+key" :src="item" preload="auto" autobuffer></audio>
+				<div class="bg"></div>
+				<div class="logo">
+					<div class="text">
+						<img src="img/POMODORO.png">
+					</div>
+				</div>
+				<div class="main" :class="[status]">
+					<div class="box navBox">
+						<div class="nav">
+							<div class="button" @click="list_click('list')">
+								<div class="icon" id="list"></div>
+							</div>
+							<div class="button" @click="list_click('assessment')">						
+								<div class="icon" id="assessment"></div>
+							</div>
+							<div class="button" @click="list_click('music')">						
+								<div class="icon" id="music"></div>
+							</div>
+						</div>
+					</div>							
+					<div class="matter">
+						<div class="newButton" :class="{pink:status=='work',aquamarine:status=='break'}">
+							<label @click="addText_click">
+								<input class="inputText" type="text" v-model="addText" @blur="inputText_blur"/>
+								<div class="text" v-if="!add">{{addText!==''?addText:"ADD A NEW MISSION..."}}</div>
+							</label>
+							
+							<div class="addButton" @click="addButton_click"></div>
+						</div>
+						<div class="currentlyItem">
+							<div class="currentlyItemTitle">
+								<div class="icon">
+									
+								</div>
+								<div class="text">								
+									{{currentlyItemTitle}}
+								</div>
+								<div class="timeItems">
+									<span class="dot" v-for="(item) in (currentlyItem?currentlyItem.count:0)"></span>
+									<div class="Ring" v-if="status=='work'">
+										<svg class="SVG" width="12" height="12">
+											<circle class="Rate" cx="6" cy="6" r="3" fill="none" stroke-width="6" :stroke-dasharray="getStrokeDasharray(3)" :stroke-dashoffset="getStrokeDashoffset(3,Math.min(1,time/totalTime))"></circle>
+										</svg>
+									</div>
+								</div>
+							</div>
+							<div class="currentlyItemTime" :class="{pink:status=='work',aquamarine:status=='break'}">
+								{{formatTime(Math.max(0,totalTime-time))}}
+							</div>
+						</div>
+						<div class="matterTodoList">
+							<div class="list">
+								<div class="listItem dark" v-for="(item) in todoListS.slice(0, 3)">
+									<div class="icon"></div>
+									<div class="text">{{item.title}}</div>
+									<div class="button" @click="function(e){todoListButton_click(e,item)}"></div>
+								</div>
+								<div class="control" v-if="todoListS.length>3">
+									<div class="moreButton" :class="{pink:status=='work',aquamarine:status=='break'}" @click="list_click('list')">MORE</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>					
+					<div class="box clockBox">				
+						<div class="clock" :class="{pause:playing,play:!playing,pink:status=='work',aquamarine:status=='break'}">
+							<div class="Ring">
+								<svg class="SVG" width="540" height="540">
+									<circle class="Rate" cx="270" cy="270" r="135" fill="none" stroke-width="270" :stroke-dasharray="getStrokeDasharray(135)" :stroke-dashoffset="getStrokeDashoffset(135,Math.min(1,time/totalTime))"></circle>
+								</svg>
+							</div>
+							<div class="clockContent">
+								<div class="bg"></div>
+								<div class="clockButton" @click="clockButton_click">
+									<div class="icon"></div>
+								</div>
+							</div>					
+						</div>								
+					</div>
+				</div>
+				<transition name="innerPage">
+					<div class="innerPage" v-if="innerPageBool">
+						<div class="innerPageContent">
+							<div v-show="innerPageName=='list'">
+								<div class="newButton pink">
+									<label @click="addText_click">
+										<input class="inputText" type="text" v-model="addText" @blur="inputText_blur"/>
+										<div class="text" v-if="!add">{{addText!==''?addText:"ADD A NEW MISSION..."}}</div>
+									</label>
+									
+									<div class="addButton" @click="addButton_click"></div>
+								</div>
+								<div class="spacing"></div>
+								<div id="to-do">
+									<div class="itemTitle fold" :class="{active:todoBool}" @click="todo_click">
+										<span>TO-DO</span>
+									</div>
+									<transition name="itemContent">
+										<div class="itemContent" v-if="todoBool">
+											<draggable class="list" v-model="todoList" group="list" @start="start" @end="end" :move="checkMove" v-bind="{animation: 200}">
+												<transition-group type="transition" :name="!drag?'flip-list':null">
+													<div class="listItem pale" v-for="(item,index) in todoList" :key="item.id">
+														<div class="icon" @click="function(e){todoListIcon_click(e,item,index)}"></div>
+														<div class="text">{{item.title}}</div>
+														<div class="button" @click="function(e){todoListButton_click(e,item)}"></div>
+													</div>
+												</transition-group>
+											</draggable>
+										</div>
+									</transition>
+								</div>
+								<draggable class="removeBox" :class="{active:removeActive}" v-model="removeList" group="list" ref="removeBox" v-if="drag">
+									<div class="text" slot="header">DELETE</div>
+								</draggable>					
+								<div class="spacing"></div>
+								<div id="done">
+									<div class="itemTitle fold" :class="{active:doneBool}" @click="done_click">
+										<span>DONE</span>
+									</div>
+									<transition name="itemContent">
+										<div class="itemContent" v-if="doneBool">
+											<!--<draggable class="todoList" v-model="doneList" group="list" @start="start" @end="end" :move="checkMove">-->
+											<div class="list">
+												<div class="listItem pale" v-for="item in doneList" :key="item.id">
+													<div class="icon"></div>
+													<div class="text">{{item.title}}</div>
+													<div class="count">
+														<span v-for="(item) in item.count">●</span>
+													</div>
+												</div>
+											</div>
+											<!--</draggable>-->
+										</div>
+									</transition>
+								</div>
+								
+							</div>
+							<div v-show="innerPageName=='assessment'">
+								<div id="focusTime">
+									<div class="itemTitle">
+										<span>FOCUS TIME</span>
+									</div>
+									<div class="itemContent">
+										<div class="tableBox">
+											<div class="tableCell">
+												<div class="countBox">
+													<div class="title">TODAY</div>
+													<div class="display">
+														<div class="num">{{todayValueSum}}</div>
+														<div class="text">/TOMATO</div>
+													</div>
+												</div>								
+											</div>
+											<div class="tableCell" style="text-align: right;">
+												<div class="countBox">
+													<div class="title">WEEK</div>
+													<div class="display">
+														<div class="num">{{weekValueSum}}</div>
+														<div class="text">/TOMATO</div>
+													</div>
+												</div>
+											</div>
+										</div>							
+									</div>
+								</div>
+								<div class="spacing"></div>
+								<div id="chart">
+									<div class="itemTitle">
+										<span>CHART</span>
+										<div class="timeDateRange">
+											〈 {{timeDateRange}} 〉
+										</div>						
+									</div>
+									<div class="itemContent">
+										<div class="report">
+											<table class="tableReportHour">
+												<tbody>
+													<tr>
+														<td>24</td>
+													</tr>
+													<tr>
+														<td>20</td>
+													</tr>
+													<tr>
+														<td>16</td>
+													</tr>
+													<tr>
+														<td>12</td>
+													</tr>
+													<tr>
+														<td>8</td>
+													</tr>
+													<tr>
+														<td>4</td>
+													</tr>
+												</tbody>
+											</table>
+											<table class="tableReport">
+												<tbody>
+													<tr class="box">
+														<td class="left">
+														</td>
+														<td v-for="(item) in week">
+															<div class="proportionBox" :style="{height: (100*item.value/24)+'%'}" :class="{active:today>=item.min&&today<item.max}" :title="item.value"></div>
+														</td>
+														<td class="right">
+														</td>
+													</tr>
+													<tr class="text">
+														<td class="left">
+														</td>
+														<td v-for="(item) in week">
+															{{item.date}}
+														</td>
+														<td class="right">
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div v-show="innerPageName=='music'">
+								<div id="work">
+									<div class="itemTitle">
+										<span>WORK</span>
+									</div>
+									<div class="itemContent">
+										<div class="radioBox">
+											<label class="radio">
+												<input class="icon" type="radio" value="none" v-model="sound.work">
+												<span class="text">NONE</span>
+											</label>							
+											<label class="radio">
+												<input class="icon" type="radio" value="default" v-model="sound.work">
+												<span class="text">DEFAULT</span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="spacing"></div>
+								<div id="break">
+									<div class="itemTitle">
+										<span>BREAK</span>
+									</div>
+									<div class="itemContent">
+										<div class="radioBox">
+											<label class="radio">
+												<input class="icon" type="radio" value="none" v-model="sound.break">
+												<span class="text">NONE</span>
+											</label>							
+											<label class="radio">
+												<input class="icon" type="radio" value="default" v-model="sound.break">
+												<span class="text">DEFAULT</span>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="nav">
+							<div class="button" :class="{active:innerPageName=='list'}" @click="list_click('list')">
+								<div class="icon" id="list"></div>
+								<div class="text">TO-DO LIST</div>
+							</div>
+							<div class="button" :class="{active:innerPageName=='assessment'}" @click="list_click('assessment')">
+								<div class="icon" id="assessment"></div>
+								<div class="text">ANALYTICS</div>
+							</div>
+							<div class="button" :class="{active:innerPageName=='music'}" @click="list_click('music')">
+								<div class="icon" id="music"></div>
+								<div class="text">RINGTONES</div>
+							</div>
+						</div>
+						<div class="box clockBox small">				
+							<div class="clock" :class="{pause:playing,play:!playing,pink:status=='work',aquamarine:status=='break'}">
+								<div class="Ring">
+									<svg class="SVG" width="104" height="104">
+										<circle class="Rate" cx="52" cy="52" r="26" fill="none" stroke-width="52" :stroke-dasharray="getStrokeDasharray(26)" :stroke-dashoffset="getStrokeDashoffset(26,Math.min(1,time/totalTime))"></circle>
+									</svg>
+								</div>
+								<div class="clockContent">
+									<div class="bg"></div>
+									<div class="clockButton" @click="clockButton_click">
+										<div class="icon"></div>
+									</div>
+								</div>					
+							</div>
+							<div class="info">
+								<div class="currentlyItemTime" :class="{pink:status=='work',aquamarine:status=='break'}">
+									{{formatTime(Math.max(0,totalTime-time))}}
+								</div>
+								<div class="text">								
+									{{currentlyItemTitle}}
+								</div>
+							</div>								
+						</div>
+						<div class="closeButton" @click="closeButton_click"></div>
+					</div>
+				</transition>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
