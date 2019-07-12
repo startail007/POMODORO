@@ -1029,13 +1029,13 @@ body{
 	background-image: url(../img/music.svg);
 }
 
-#list:hover,.innerPage .nav .button:hover #list,.innerPage .nav .button.active #list{
+.button:hover #list,.button.active #list{
     background-image: url(../img/list_active.svg);
 }
-#assessment:hover,.innerPage .nav .button:hover #assessment,.innerPage .nav .button.active #assessment{
+.button:hover #assessment,.button.active #assessment{
     background-image: url(../img/assessment_active.svg);
 }
-#music:hover,.innerPage .nav .button:hover #music,.innerPage .nav .button.active #music{
+.button:hover #music,.button.active #music{
     background-image: url(../img/music_active.svg);
 }
 
