@@ -120,8 +120,8 @@
 									</div>
 									<transition name="itemContent">
 										<div class="itemContent" v-if="todoBool">
-											<draggable class="list" v-model="todoList" group="list" @start="start" @end="end" :move="checkMove" v-bind="{animation: 200}">
-												<transition-group type="transition" :name="!drag?'flip-list':null">
+											<draggable class="list" v-model="todoList" group="todoList" @start="todoListStart" @end="todoListEnd" :move="todoListCheckMove" v-bind="{animation: 200}">
+												<transition-group type="transition" :name="!todoListDrag?'flip-list':null">
 													<div class="listItem pale" v-for="(item,index) in todoList" :key="item.id">
 														<div class="icon" @click="function(e){todoListIcon_click(e,item,index)}"></div>
 														<div class="text">{{item.title}}</div>
@@ -132,7 +132,7 @@
 										</div>
 									</transition>
 								</div>
-								<draggable class="removeBox" :class="{active:removeActive}" v-model="removeList" group="list" ref="removeBox" v-if="drag">
+								<draggable class="removeBox" :class="{active:removeActive}" v-model="removeList" group="todoList" ref="todoListRemoveBox" v-if="todoListDrag">
 									<div class="text" slot="header">DELETE</div>
 								</draggable>					
 								<div class="spacing"></div>
@@ -142,20 +142,23 @@
 									</div>
 									<transition name="itemContent">
 										<div class="itemContent" v-if="doneBool">
-											<!--<draggable class="todoList" v-model="doneList" group="list" @start="start" @end="end" :move="checkMove">-->
-											<div class="list">
-												<div class="listItem pale" v-for="item in doneList" :key="item.id">
-													<div class="icon"></div>
-													<div class="text">{{item.title}}</div>
-													<div class="count">
-														<span v-for="(item) in item.count">●</span>
+											<draggable class="list" v-model="doneList" group="doneList" @start="doneListStart" @end="doneListEnd" :move="doneListCheckMove" v-bind="{animation: 200}">
+												<transition-group type="transition" :name="!doneListStart?'flip-list':null">
+													<div class="listItem pale" v-for="(item,index) in doneList" :key="item.id">
+														<div class="icon" @click="function(e){doneListIcon_click(e,item,index)}"></div>
+														<div class="text">{{item.title}}</div>
+														<div class="count">
+															<span v-for="(item) in item.count">●</span>
+														</div>
 													</div>
-												</div>
-											</div>
-											<!--</draggable>-->
+												</transition-group>
+											</draggable>
 										</div>
 									</transition>
 								</div>
+								<draggable class="removeBox" :class="{active:removeActive}" v-model="removeList" group="doneList" ref="doneListRemoveBox" v-if="doneListDrag">
+									<div class="text" slot="header">DELETE</div>
+								</draggable>
 								
 							</div>
 							<div v-show="innerPageName=='assessment'">

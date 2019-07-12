@@ -76,8 +76,8 @@ body{
 .removeBox .text{
     position: absolute;
     display: block;
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
     border: 1px solid #ff0;
     text-align: center;
     color: #ff0;
@@ -479,6 +479,13 @@ body{
 #to-do .listItem .icon:hover{
     background-color: #fff;
 }
+#done .listItem .icon{
+    cursor: pointer;
+    transition: background-color .3s;
+}
+#done .listItem .icon:hover{
+    background-color: #fff;
+}
 #done .listItem .icon:before{
     content: "";
     position: absolute;
@@ -526,6 +533,9 @@ body{
     text-decoration: line-through;
 }
 #to-do .listItem{
+    cursor: move;
+}
+#done .listItem{
     cursor: move;
 }
 
