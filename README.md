@@ -6,5 +6,5 @@
 ##### 2.在to-do list內，勾選已完成的代辦事項，如要刪除可按住拖曳到刪除處放開
 ##### 3.在analytics內看到一周內的時間
 ##### 4.在ringtones設置工作與休息時間完成後的提示音
-### 演示
+### DEMO
 [線上觀看](https://virtools.github.io/POMODORO/)
