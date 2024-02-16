@@ -7,4 +7,4 @@
 ##### 3.在analytics內看到一周內的時間
 ##### 4.在ringtones設置工作與休息時間完成後的提示音
 ### DEMO
-[線上觀看](https://virtools.github.io/POMODORO/)
+[線上觀看](https://startail007.github.io/POMODORO/)
